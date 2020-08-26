@@ -1,0 +1,15 @@
+name: route53-action
+description: Create a record in Route53 hosted zone
+runs:
+  using: "node12"
+  main: "index.js"
+inputs:
+  hosted-zone-id:
+    description: "Hosted zone id"
+    required: true
+  name:
+    description: "New record name"
+    required: true
+  ip:
+    description: "IP address for new record"
+    required: true
