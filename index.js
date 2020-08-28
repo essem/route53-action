@@ -4,6 +4,7 @@ const tmp = require("tmp");
 const childProcess = require("child_process");
 
 const hostedZoneId = core.getInput("hosted-zone-id");
+const action = core.getInput("action");
 const name = core.getInput("name");
 const ip = core.getInput("ip");
 
@@ -11,7 +12,7 @@ const content = {
   Comment: "CREATE a record ",
   Changes: [
     {
-      Action: "CREATE",
+      Action: action,
       ResourceRecordSet: {
         Name: name,
         Type: "A",
@@ -28,5 +29,10 @@ fs.writeFileSync(file.name, JSON.stringify(content));
 
 const command = `aws route53 change-resource-record-sets --hosted-zone-id ${hostedZoneId} --change-batch file://${file.name}`;
 console.log(`Command: ${command}`);
-const output = childProcess.execSync(command);
-console.log(output.toString());
+
+try {
+  const output = childProcess.execSync(command);
+  console.log(output.toString());
+} catch (err) {
+  console.log(`error: ${err.toString()}`);
+}

@@ -7,6 +7,10 @@ inputs:
   hosted-zone-id:
     description: "Hosted zone id"
     required: true
+  action:
+    description: "Action (CREATE/DELETE)"
+    required: true
+    default: "CREATE"
   name:
     description: "New record name"
     required: true
