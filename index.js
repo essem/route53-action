@@ -22,10 +22,12 @@ const content = {
     },
   ],
 };
+const contentJson = JSON.stringify(content);
+console.log(contentJson);
 
 const file = tmp.fileSync();
 console.log(`File: ${file.name}`);
-fs.writeFileSync(file.name, JSON.stringify(content));
+fs.writeFileSync(file.name, contentJson);
 
 const command = `aws route53 change-resource-record-sets --hosted-zone-id ${hostedZoneId} --change-batch file://${file.name}`;
 console.log(`Command: ${command}`);
