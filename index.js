@@ -4,21 +4,16 @@ const tmp = require("tmp");
 const childProcess = require("child_process");
 
 const hostedZoneId = core.getInput("hosted-zone-id");
+const comment = core.getInput("comment");
 const action = core.getInput("action");
-const name = core.getInput("name");
-const ip = core.getInput("ip");
+const resourceRecordSet = core.getInput("resource-record-set");
 
 const content = {
-  Comment: "CREATE a record ",
+  Comment: comment,
   Changes: [
     {
       Action: action,
-      ResourceRecordSet: {
-        Name: name,
-        Type: "A",
-        TTL: 300,
-        ResourceRecords: [{ Value: ip }],
-      },
+      ResourceRecordSet: JSON.parse(resourceRecordSet),
     },
   ],
 };
