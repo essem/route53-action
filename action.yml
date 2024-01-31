@@ -1,7 +1,7 @@
 name: route53-action
 description: Create a record in Route53 hosted zone
 runs:
-  using: "node16"
+  using: "node20"
   main: "index.js"
 inputs:
   hosted-zone-id:
